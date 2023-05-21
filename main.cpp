@@ -1,22 +1,66 @@
 #include "BitmapaExt.hpp"
 #include "Dylatacja.hpp"
 #include "Erozja.hpp"
+#include "ZlozeniePrzeksztalcen.hpp"
 
 int main()
 {
-    BitmapaExt aa(7, 7);
-    aa(3, 1) = aa(2, 2) = aa(3, 2) = aa(4, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = aa(4, 3) = aa(5, 3) = aa(2, 4) = aa(3, 4) = aa(4, 4) = aa(3, 5) = true;
+    // BitmapaExt aa(7, 7);
+    // aa(3, 1) = aa(2, 2) = aa(3, 2) = aa(4, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = aa(4, 3) = aa(5, 3) = aa(2, 4) = aa(3, 4) = aa(4, 4) = aa(3, 5) = true;
+    // std::cout << aa << std::endl;
+
+    // Dylatacja d;
+    // d.przeksztalc(aa);
+    // std::cout << aa << std::endl;
+
+    Dylatacja dylatacja;
+    Erozja erozja;
+
+    BitmapaExt aa(5, 5);
+    aa(1, 1) = aa(2, 1) = aa(3, 1) = aa(2, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = true;
+
+    erozja.przeksztalc(aa);
+    dylatacja.przeksztalc(aa);
+
+    ZlozeniePrzeksztalcen z;
+    z.dodajPrzeksztalcenie(&dylatacja);
+    z.dodajPrzeksztalcenie(&erozja);
+    z.przeksztalc(aa);
     std::cout << aa << std::endl;
 
-    Dylatacja d;
-    d.przeksztalc(aa);
-    std::cout << aa << std::endl;
+    std::vector<std::vector<bool>> vec = 
+    {
+        {0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 0, 0},
+        {0, 1, 1, 1, 1, 1, 0},
+        {0, 0, 1, 1, 1, 0, 0},
+        {0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0}
+    };
 
-    BitmapaExt aaa(7, 7);
-    aaa(3, 1) = aaa(2, 2) = aaa(3, 2) = aaa(4, 2) = aaa(1, 3) = aaa(2, 3) = aaa(3, 3) = aaa(4, 3) = aaa(5, 3) = aaa(2, 4) = aaa(3, 4) = aaa(4, 4) = aaa(3, 5) = true;
-    std::cout << aaa << std::endl;
+    BitmapaExt bitmapa_test{vec};
+    z.przeksztalc(bitmapa_test);
+    std::cout << bitmapa_test << std::endl;
 
-    Erozja e;
-    e.przeksztalc(aaa);
-    std::cout << aaa << std::endl;
+    dylatacja.przeksztalc(bitmapa_test);
+    std::cout << bitmapa_test << std::endl;
+
+    try
+    {
+        std::vector<std::vector<bool>> hehe =
+        {
+            {1, 1, 1, 0, 0},
+            {0, 1, 1, 0, 1},
+            {1, 1},
+            {1, 0, 0, 1}
+        };
+
+        BitmapaExt aa{hehe};
+    }
+    catch(const myexceptions::bad_bitmap_size& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
 }

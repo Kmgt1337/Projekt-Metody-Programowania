@@ -4,11 +4,15 @@
 #include "Bitmapa.hpp"
 #include "MyExceptions.hpp"
 #include <iostream>
+#include <initializer_list>
+#include <vector>
 
 class BitmapaExt : public Bitmapa
 {
 public:
     BitmapaExt(unsigned int length, unsigned int width);
+    BitmapaExt(const std::vector<std::vector<bool>>& bmp);
+
     ~BitmapaExt();
 
     unsigned length() const override
