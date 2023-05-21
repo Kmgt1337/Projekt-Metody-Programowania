@@ -44,6 +44,7 @@ int main()
     std::cout << bitmapa_test << std::endl;
 
     dylatacja.przeksztalc(bitmapa_test);
+    erozja.przeksztalc(bitmapa_test);
     std::cout << bitmapa_test << std::endl;
 
     try

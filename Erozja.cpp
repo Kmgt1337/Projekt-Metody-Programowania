@@ -10,7 +10,7 @@ void Erozja::przeksztalc(Bitmapa& bmp)
 
     // pomocnicza tablica tego samego rozmiaru co bitmapa - wskazuje na pola ktore bedziemy zamieniac z bialego na czarny
     bool** to_change = f_create_2d_array<bool>(bmp.length(), bmp.width());
-    
+
     // I przypadek brzegowy - lewy gorny punkt bitmapy
     if(!bmp(0, 0))
     {
@@ -39,7 +39,7 @@ void Erozja::przeksztalc(Bitmapa& bmp)
     }
 
     // IV przypadek brzegowy - prawy dwolny punkt bitmapy
-    if(bmp(bmp.length() - 1, bmp.width() - 1))
+    if(!bmp(bmp.length() - 1, bmp.width() - 1))
     {
         if(!bmp(bmp.length() - 1, bmp.width() - 2) || !bmp(bmp.length(), bmp.width() - 1))
         {
