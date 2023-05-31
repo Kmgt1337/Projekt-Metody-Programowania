@@ -1,6 +1,9 @@
 #include "BitmapaExt.hpp"
 #include "Dylatacja.hpp"
 #include "Erozja.hpp"
+#include "Usrednianie.h"
+#include "Zerowanie.h"
+#include "Inwersja.h"
 #include "ZlozeniePrzeksztalcen.hpp"
 
 int main()
@@ -13,20 +16,20 @@ int main()
     // d.przeksztalc(aa);
     // std::cout << aa << std::endl;
 
-    Dylatacja dylatacja;
-    Erozja erozja;
+    // Dylatacja dylatacja;
+    // Erozja erozja;
 
-    BitmapaExt<bool> aa(5, 5);
-    aa(1, 1) = aa(2, 1) = aa(3, 1) = aa(2, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = true;
+    // BitmapaExt<bool> aa(5, 5);
+    // aa(1, 1) = aa(2, 1) = aa(3, 1) = aa(2, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = true;
 
-    erozja.przeksztalc(aa);
-    dylatacja.przeksztalc(aa);
+    // erozja.przeksztalc(aa);
+    // dylatacja.przeksztalc(aa);
 
-    ZlozeniePrzeksztalcen z;
-    z.dodajPrzeksztalcenie(&dylatacja);
-    z.dodajPrzeksztalcenie(&erozja);
-    z.przeksztalc(aa);
-    std::cout << aa << std::endl;
+    // ZlozeniePrzeksztalcen z;
+    // z.dodajPrzeksztalcenie(&dylatacja);
+    // z.dodajPrzeksztalcenie(&erozja);
+    // z.przeksztalc(aa);
+    // std::cout << aa << std::endl;
 
     std::vector<std::vector<bool>> vec = 
     {
@@ -39,29 +42,42 @@ int main()
         {0, 0, 0, 0, 0, 0, 0}
     };
 
-    BitmapaExt<bool> bitmapa_test{vec};
-    z.przeksztalc(bitmapa_test);
+    const BitmapaExt<bool> bitmapa_test{vec};
+    BitmapaExt<bool> test_inwersja{bitmapa_test};
+    BitmapaExt<bool> test_erozja{bitmapa_test};
+    BitmapaExt<bool> test_dylatacja{bitmapa_test};
+    BitmapaExt<bool> test_zerowanie{bitmapa_test};
+    BitmapaExt<bool> test_usrednianie{bitmapa_test};
+    BitmapaExt<bool> test_zlozenie{bitmapa_test};
+
+    Inwersja i;
+    Erozja e;
+    Dylatacja d;
+    Zerowanie z;
+    Usrednianie u;
+
     std::cout << bitmapa_test << std::endl;
 
-    dylatacja.przeksztalc(bitmapa_test);
-    erozja.przeksztalc(bitmapa_test);
-    std::cout << bitmapa_test << std::endl;
+    i.przeksztalc(test_inwersja);
+    std::cout << test_inwersja << std::endl;
 
-    try
-    {
-        std::vector<std::vector<bool>> hehe =
-        {
-            {1, 1, 1, 0, 0},
-            {0, 1, 1, 0, 1},
-            {1, 1},
-            {1, 0, 0, 1}
-        };
+    e.przeksztalc(test_erozja);
+    std::cout << test_erozja << std::endl;
 
-        BitmapaExt<bool> aa{hehe};
-    }
-    catch(const myexceptions::bad_bitmap_size& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    
+    d.przeksztalc(test_dylatacja);
+    std::cout << test_dylatacja << std::endl;
+
+    z.przeksztalc(test_zerowanie);
+    std::cout << test_zerowanie << std::endl;
+
+    u.przeksztalc(test_usrednianie);
+    std::cout << test_usrednianie << std::endl;
+
+    ZlozeniePrzeksztalcen zlozenie;
+    zlozenie.dodajPrzeksztalcenie(&d);
+    zlozenie.dodajPrzeksztalcenie(&i);
+    zlozenie.dodajPrzeksztalcenie(&u);
+    zlozenie.przeksztalc(test_zlozenie);
+    std::cout << test_zlozenie << std::endl;
+
 }

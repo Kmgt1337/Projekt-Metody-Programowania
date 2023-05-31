@@ -13,6 +13,8 @@ class BitmapaExt : public Bitmapa
 public:
     BitmapaExt(unsigned int length, unsigned int width);
     BitmapaExt(const std::vector<std::vector<T>>& bmp);
+    BitmapaExt(const BitmapaExt<T>& other);
+    BitmapaExt<T>& operator=(const BitmapaExt<T>& other);
 
     ~BitmapaExt()
     {
@@ -105,6 +107,45 @@ BitmapaExt<T>::BitmapaExt(const std::vector<std::vector<T>>& vec)
             _bmp[i][j] = vec.at(i).at(j);
         }
     }
+}
+
+template<typename T>
+BitmapaExt<T>::BitmapaExt(const BitmapaExt<T>& other)
+{
+    _length = other._length;
+    _width = other._width;
+    _bmp = f_create_2d_array<T>(_length, _width);
+
+    for(int i = 0; i < _length; i++)
+    {
+        for(int j = 0; j < _width; j++)
+        {
+            _bmp[i][j] = other._bmp[i][j];
+        }
+    }
+}
+
+template <typename T>
+BitmapaExt<T>& BitmapaExt<T>::operator=(const BitmapaExt<T> &other)
+{
+    if(this == &other)
+    {
+        return *this;
+    }
+
+    _length = other._length;
+    _width = other._width;
+    _bmp = f_create_2d_array<T>(_length, _width);
+
+    for(int i = 0; i < _length; i++)
+    {
+        for(int j = 0; j < _width; j++)
+        {
+            _bmp[i][j] = other._bmp[i][j];
+        }
+    }
+
+    return *this;
 }
 
 template <typename T1>

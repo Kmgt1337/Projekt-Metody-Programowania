@@ -35,21 +35,6 @@ namespace myexceptions
     private:
         std::string _msg;
     };
-
-    class bad_type : public std::exception
-    {
-    public:
-        bad_type(std::string msg) : _msg{msg}
-        {}
-
-        const char* what() const noexcept override
-        {
-            return _msg.c_str();
-        }
-
-    private:
-        std::string _msg;
-    };
 }
 
 #endif
