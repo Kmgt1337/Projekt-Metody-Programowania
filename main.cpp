@@ -16,7 +16,7 @@ int main()
     Dylatacja dylatacja;
     Erozja erozja;
 
-    BitmapaExt aa(5, 5);
+    BitmapaExt<bool> aa(5, 5);
     aa(1, 1) = aa(2, 1) = aa(3, 1) = aa(2, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = true;
 
     erozja.przeksztalc(aa);
@@ -39,7 +39,7 @@ int main()
         {0, 0, 0, 0, 0, 0, 0}
     };
 
-    BitmapaExt bitmapa_test{vec};
+    BitmapaExt<bool> bitmapa_test{vec};
     z.przeksztalc(bitmapa_test);
     std::cout << bitmapa_test << std::endl;
 
@@ -57,7 +57,7 @@ int main()
             {1, 0, 0, 1}
         };
 
-        BitmapaExt aa{hehe};
+        BitmapaExt<bool> aa{hehe};
     }
     catch(const myexceptions::bad_bitmap_size& e)
     {
