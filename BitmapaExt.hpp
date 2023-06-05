@@ -5,6 +5,7 @@
 #include "MyExceptions.hpp"
 #include "Pomocnicze.hpp"
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 template <typename T>
@@ -14,12 +15,9 @@ public:
     BitmapaExt(unsigned int length, unsigned int width);
     BitmapaExt(const std::vector<std::vector<T>>& bmp);
     BitmapaExt(const BitmapaExt<T>& other);
+    BitmapaExt(std::ifstream &input_file);
     BitmapaExt<T>& operator=(const BitmapaExt<T>& other);
-
-    ~BitmapaExt()
-    {
-        f_delete_2d_array<T>(_bmp, _length);
-    }
+    ~BitmapaExt();
 
     unsigned length() const override
     {
@@ -65,7 +63,7 @@ BitmapaExt<T>::BitmapaExt(unsigned int length, unsigned int width)
     {
         throw myexceptions::bad_bitmap_size("Zly rozmiar bitmapy. Konstruktor BitmapaExt<T>(unsigned int, unsigned int)");
     }
-    
+
     _length = length;
     _width = width;
     _bmp = f_create_2d_array<T>(_length, _width);
@@ -161,6 +159,28 @@ std::ostream& operator<<(std::ostream& stream, const BitmapaExt<T1>& bmp)
     }
 
     return stream;
+}
+template <typename T>
+BitmapaExt<T>::BitmapaExt(std::ifstream &input_file)
+{
+    input_file>>_width;
+    input_file>>_length;
+    _bmp = f_create_2d_array<bool>(_length, _width);
+
+    if(_width<2||_length<2) throw myexceptions::bad_bitmap_size("Zly rozmiar bitmapy. Konstruktor BitmapaExt<T>(const std::vector<std::vector<T>&)");
+    for(size_t i = 0; i < _length; i++)
+    {
+        for(size_t j = 0; j < _width; j++)
+        {
+            input_file>>_bmp[i][j];
+        }
+    }
+}
+
+template <typename T>
+BitmapaExt<T>::~BitmapaExt()
+{
+    f_delete_2d_array<T>(_bmp, _length);
 }
 
 #endif

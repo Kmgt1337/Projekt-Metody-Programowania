@@ -6,6 +6,88 @@
 #include "Inwersja.h"
 #include "ZlozeniePrzeksztalcen.hpp"
 
+void menu()
+{
+    std::vector<std::vector<bool>> vec =
+    {
+        {0, 0},
+        {0, 0}
+    };
+
+    BitmapaExt<bool> current_bitmap{vec};
+    Inwersja i;
+    Erozja e;
+    Dylatacja d;
+    Zerowanie z;
+    Usrednianie u;
+    while(true)
+    {
+        system("cls");
+        unsigned short answer;
+        std::cout<<"Menu"<<std::endl;
+        std::cout<<"----------------------------------"<<std::endl;
+        std::cout<<"1.Wprowadz bitmape"<<std::endl;
+        std::cout<<"2.Dylatacja"<<std::endl;
+        std::cout<<"3.Erozja"<<std::endl;
+        std::cout<<"4.Inwersja"<<std::endl;
+        std::cout<<"5.Zerowanie"<<std::endl;
+        std::cout<<"6.Usrednianie"<<std::endl;
+        std::cout<<"7.Wyjdz"<<std::endl;
+        std::cin>>answer;
+        while(answer>7||answer==0)
+        {
+            std::cout<<"Niepoprawny indeks sprobuj ponownie: ";
+            std::cin>>answer;
+        }
+        switch(answer)
+        {
+        case 1:
+            {
+                std::string file_name;
+                std::cout<<"Podaj nazwe pliku przechowujacego bitmape: ";
+                std::cin>>file_name;
+                std::ifstream input_file;
+                input_file.open(file_name.c_str());
+                BitmapaExt<bool> new_bitmap(input_file);
+                current_bitmap=new_bitmap;
+                input_file.close();
+                break;
+            }
+        case 2:
+            {
+                d.przeksztalc(current_bitmap);
+                break;
+            }
+        case 3:
+            {
+                e.przeksztalc(current_bitmap);
+                break;
+            }
+        case 4:
+            {
+                i.przeksztalc(current_bitmap);
+                break;
+            }
+        case 5:
+            {
+                z.przeksztalc(current_bitmap);
+                break;
+            }
+        case 6:
+            {
+                u.przeksztalc(current_bitmap);
+                break;
+            }
+        case 7:
+            {
+                exit(0);
+            }
+        }
+        std::cout<<"Wynik: "<<std::endl<<current_bitmap<<std::endl;
+        system("pause");
+    }
+}
+
 int main()
 {
     // BitmapaExt aa(7, 7);
@@ -31,7 +113,10 @@ int main()
     // z.przeksztalc(aa);
     // std::cout << aa << std::endl;
 
-    std::vector<std::vector<bool>> vec = 
+    menu();
+    return 0;
+    /*
+    std::vector<std::vector<bool>> vec =
     {
         {0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 1, 0, 0, 0},
@@ -79,5 +164,5 @@ int main()
     zlozenie.dodajPrzeksztalcenie(&u);
     zlozenie.przeksztalc(test_zlozenie);
     std::cout << test_zlozenie << std::endl;
-
+    */
 }
