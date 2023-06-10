@@ -1,6 +1,10 @@
 #include "Usrednianie.h"
 #include "Pomocnicze.hpp"
 
+/*
+Funkcja wykonuje przeksztalcenie bitmapy - uœrednianie
+@param bmp bitmapa ktora ma zostac przeksztalcona
+*/
 void Usrednianie::przeksztalc(Bitmapa& bmp)
 {
     bool** to_change = f_create_2d_array<bool>(bmp.length(), bmp.width());

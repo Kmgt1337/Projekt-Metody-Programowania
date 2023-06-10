@@ -4,11 +4,15 @@
 
 using namespace std;
 
+/*
+Funkcja wykonuje przeksztalcenie bitmapy - dylatacja
+@param bmp bitmapa ktora ma zostac przeksztalcona
+*/
 void Dylatacja::przeksztalc(Bitmapa& bmp)
-{ 
+{
     // funkcja dziala tylko dla prostokatych bitmap
     // zlozonosc - O(n^2)
-    // nie trzeba juz tutaj sprawdzac warunkow, poniewaz robi to konstruktor BitmapaExt 
+    // nie trzeba juz tutaj sprawdzac warunkow, poniewaz robi to konstruktor BitmapaExt
 
     // pomocnicza tablica tego samego rozmiaru co bitmapa - wskazuje na pola ktore bedziemy zamieniac z bialego na czarny
     bool** to_change = f_create_2d_array<bool>(bmp.length(), bmp.width());
@@ -28,7 +32,7 @@ void Dylatacja::przeksztalc(Bitmapa& bmp)
         if(bmp(bmp.length() - 2, 0) || bmp(bmp.length() - 1, 1))
         {
             to_change[bmp.length() - 1][0] = true;
-        } 
+        }
     }
 
     /// III przypadek brzegowy - prawy gorny punkt bitmapy
@@ -90,7 +94,7 @@ void Dylatacja::przeksztalc(Bitmapa& bmp)
     {
         for(size_t j = 0; j < bmp.width(); j++)
         {
-            if(bmp(i, j)) 
+            if(bmp(i, j))
             {
                 continue;
             }

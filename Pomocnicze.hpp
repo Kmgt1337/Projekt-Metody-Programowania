@@ -3,7 +3,13 @@
 
 #include <new>
 #include <iostream>
+#include <vector>
 
+/*
+Funkcja tworzaca tablice 2 wymiarowa
+@param rows ilosc wierszy
+@param cols ilosc wierszy
+*/
 template<typename T>
 T** f_create_2d_array(int rows, int cols)
 {
@@ -34,9 +40,14 @@ T** f_create_2d_array(int rows, int cols)
         }
     }
 
-    return tab; 
+    return tab;
 }
 
+/*
+Funkcja usuwajaca tablice 2 wymiarowa
+@param tab tablica do usuniecia
+@param rows ilosc wierszy
+*/
 template<typename T>
 void f_delete_2d_array(T** tab, int rows)
 {
@@ -46,5 +57,6 @@ void f_delete_2d_array(T** tab, int rows)
     }
     delete[] tab;
 }
+
 
 #endif

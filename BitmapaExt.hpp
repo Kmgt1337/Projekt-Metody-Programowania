@@ -19,16 +19,30 @@ public:
     BitmapaExt<T>& operator=(const BitmapaExt<T>& other);
     ~BitmapaExt();
 
+    /*
+    Funkcja zwraca dlugosc bitmapy
+    @return dlugosc bitmapy
+    */
     unsigned length() const override
     {
         return _length;
     }
 
+    /*
+    Funkcja zwraca szerokosc bitmapy
+    @return szerokosc bitmapy
+    */
     unsigned width() const override
     {
         return _width;
     }
 
+    /*
+    Funkcja zwraca referencje do elementu bitmapy o danych koordynatach
+    @param x lokalizacja elementu na dlugosci bitmapy
+    @param y lokalizacja elementu na szerokosci bitmapy
+    @return referencja do odpowiedniego elementu bitmapy
+    */
     bool& operator() (unsigned x, unsigned y) override
     {
        if(x < 0 || x >= _length || y < 0 || y >= _width)
@@ -38,6 +52,12 @@ public:
        return _bmp[x][y];
     }
 
+    /*
+    Funkcja zwraca wartosc elementu bitmapy o danych koordynatach
+    @param x lokalizacja elementu na dlugosci bitmapy
+    @param y lokalizacja elementu na szerokosci bitmapy
+    @return wartosc odpowiedniego elementu bitmapy
+    */
     bool operator() (unsigned x, unsigned y) const override
     {
         if(x < 0 || x >= _length || y < 0 || y >= _width)
@@ -56,6 +76,11 @@ private:
     unsigned int _width;
 };
 
+/*
+Konstruktor tworzacy bitmape z dlugosci i szerokosci wype³niona wartoscia false
+@param length dlugosc bitmapy
+@param width szerokosc bitmapy
+*/
 template <typename T>
 BitmapaExt<T>::BitmapaExt(unsigned int length, unsigned int width)
 {
@@ -77,6 +102,10 @@ BitmapaExt<T>::BitmapaExt(unsigned int length, unsigned int width)
     }
 }
 
+/*
+Konstruktor tworzacy bitmape z wektora dwuwymiarowego
+@param vec referencja do wektora na podstawie ktorego tworzymy bitmape
+*/
 template <typename T>
 BitmapaExt<T>::BitmapaExt(const std::vector<std::vector<T>>& vec)
 {
@@ -107,6 +136,10 @@ BitmapaExt<T>::BitmapaExt(const std::vector<std::vector<T>>& vec)
     }
 }
 
+/*
+Konstruktor kopiujacy
+@param other bitmapa do skopiowania
+*/
 template<typename T>
 BitmapaExt<T>::BitmapaExt(const BitmapaExt<T>& other)
 {
@@ -123,6 +156,9 @@ BitmapaExt<T>::BitmapaExt(const BitmapaExt<T>& other)
     }
 }
 
+/*
+Prze³adowanie operatora przypisania zeby przypisywal
+*/
 template <typename T>
 BitmapaExt<T>& BitmapaExt<T>::operator=(const BitmapaExt<T> &other)
 {
@@ -146,6 +182,11 @@ BitmapaExt<T>& BitmapaExt<T>::operator=(const BitmapaExt<T> &other)
     return *this;
 }
 
+/*
+Funkcja wyswietla bitmape w konsoli
+@param stream strumien do ktorego wypisac zawartosc bitmapy
+@param bmp bitmapa ktora ma zostac wypisana
+*/
 template <typename T1>
 std::ostream& operator<<(std::ostream& stream, const BitmapaExt<T1>& bmp)
 {
@@ -160,6 +201,11 @@ std::ostream& operator<<(std::ostream& stream, const BitmapaExt<T1>& bmp)
 
     return stream;
 }
+
+/*
+Funkcja pobierajaca bitmape z pliku
+@param input_file uchwyt do pliku z danymi bitmapy do za³adowania
+*/
 template <typename T>
 BitmapaExt<T>::BitmapaExt(std::ifstream &input_file)
 {

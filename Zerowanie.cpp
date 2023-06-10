@@ -1,6 +1,10 @@
 #include "Zerowanie.h"
 #include "Pomocnicze.hpp"
 
+/*
+Funkcja wykonuje przeksztalcenie bitmapy - zerowanie
+@param bmp bitmapa ktora ma zostac przeksztalcona
+*/
 void Zerowanie::przeksztalc(Bitmapa& bmp)
 {
     for(size_t i = 0; i < bmp.length(); i++)
