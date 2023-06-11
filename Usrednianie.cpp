@@ -2,7 +2,7 @@
 #include "Pomocnicze.hpp"
 
 /*
-Funkcja wykonuje przeksztalcenie bitmapy - uœrednianie
+Funkcja wykonuje przeksztalcenie bitmapy - uï¿½rednianie
 @param bmp bitmapa ktora ma zostac przeksztalcona
 */
 void Usrednianie::przeksztalc(Bitmapa& bmp)
@@ -22,14 +22,14 @@ void Usrednianie::przeksztalc(Bitmapa& bmp)
         }
     }
 
-    // zamiana obliczonych elementow na czarne
+    // zamiana obliczonych elementow na przeciwny kolor
     for(size_t i = 0; i < bmp.length(); i++)
     {
         for(size_t j = 0; j < bmp.width(); j++)
         {
             if(to_change[i][j])
             {
-                bmp(i, j) = false;
+                bmp(i, j) = !bmp(i, j);
             }
         }
     }

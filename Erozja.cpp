@@ -13,7 +13,7 @@ void Erozja::przeksztalc(Bitmapa& bmp)
     // zlozonosc - O(n^2)
     // nie trzeba juz tutaj sprawdzac warunkow, poniewaz robi to konstruktor BitmapaExt
 
-    // pomocnicza tablica tego samego rozmiaru co bitmapa - wskazuje na pola ktore bedziemy zamieniac z bialego na czarny
+    // pomocnicza tablica tego samego rozmiaru co bitmapa - wskazuje na pola ktore bedziemy zamieniac z czarnego na bialy
     bool** to_change = f_create_2d_array<bool>(bmp.length(), bmp.width());
 
     // I przypadek brzegowy - lewy gorny punkt bitmapy
@@ -108,7 +108,7 @@ void Erozja::przeksztalc(Bitmapa& bmp)
         }
     }
 
-    // zamiana obliczonych elementow na czarne
+    // zamiana obliczonych elementow na bialy
     for(size_t i = 0; i < bmp.length(); i++)
     {
         for(size_t j = 0; j < bmp.width(); j++)
