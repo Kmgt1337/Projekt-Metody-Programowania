@@ -20,7 +20,6 @@ void menu()
     Dylatacja d;
     Zerowanie z;
     Usrednianie u;
-    ZlozeniePrzeksztalcen zloz;
     while(true)
     {
         system("cls");
@@ -84,6 +83,7 @@ void menu()
             }
         case 7:
             {
+                ZlozeniePrzeksztalcen zloz;
                 std::string input;
                 std::cout << "\nPodaj ciag przeksztalcen do wykonania. Akceptowane znaki:\n"
                 << "i - inwersja, e - erozja, d - dylatacja, z - zerowanie, u - usrednianie\n"
@@ -95,7 +95,7 @@ void menu()
                 for(const auto& token : input)
                 {
                     tolower(token);
-                    if(token == 'i') zloz.dodajPrzeksztalcenie(&i);
+                    if(token == 'i')      zloz.dodajPrzeksztalcenie(&i);
                     else if(token == 'e') zloz.dodajPrzeksztalcenie(&e);
                     else if(token == 'd') zloz.dodajPrzeksztalcenie(&d);
                     else if(token == 'z') zloz.dodajPrzeksztalcenie(&z);
@@ -121,78 +121,12 @@ void menu()
 
 int main()
 {
-    // BitmapaExt aa(7, 7);
-    // aa(3, 1) = aa(2, 2) = aa(3, 2) = aa(4, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = aa(4, 3) = aa(5, 3) = aa(2, 4) = aa(3, 4) = aa(4, 4) = aa(3, 5) = true;
-    // std::cout << aa << std::endl;
-
-    // Dylatacja d;
-    // d.przeksztalc(aa);
-    // std::cout << aa << std::endl;
-
-    // Dylatacja dylatacja;
-    // Erozja erozja;
-
-    // BitmapaExt<bool> aa(5, 5);
-    // aa(1, 1) = aa(2, 1) = aa(3, 1) = aa(2, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = true;
-
-    // erozja.przeksztalc(aa);
-    // dylatacja.przeksztalc(aa);
-
-    // ZlozeniePrzeksztalcen z;
-    // z.dodajPrzeksztalcenie(&dylatacja);
-    // z.dodajPrzeksztalcenie(&erozja);
-    // z.przeksztalc(aa);
-    // std::cout << aa << std::endl;
-
-    menu();
-    return 0;
-    
-    // std::vector<std::vector<bool>> vec =
-    // {
-    //     {0, 0, 0, 0, 0, 0, 0},
-    //     {0, 0, 0, 1, 0, 0, 0},
-    //     {0, 0, 1, 1, 1, 0, 0},
-    //     {0, 1, 1, 1, 1, 1, 0},
-    //     {0, 0, 1, 1, 1, 0, 0},
-    //     {0, 0, 0, 1, 0, 0, 0},
-    //     {0, 0, 0, 0, 0, 0, 0}
-    // };
-
-    // const BitmapaExt<bool> bitmapa_test{vec};
-    // BitmapaExt<bool> test_inwersja{bitmapa_test};
-    // BitmapaExt<bool> test_erozja{bitmapa_test};
-    // BitmapaExt<bool> test_dylatacja{bitmapa_test};
-    // BitmapaExt<bool> test_zerowanie{bitmapa_test};
-    // BitmapaExt<bool> test_usrednianie{bitmapa_test};
-    // BitmapaExt<bool> test_zlozenie{bitmapa_test};
-
-    // std::cout << bitmapa_test << std::endl;
-
-    // i.przeksztalc(test_inwersja);
-    // std::cout << test_inwersja << std::endl;
-
-    // e.przeksztalc(test_erozja);
-    // std::cout << test_erozja << std::endl;
-
-    // d.przeksztalc(test_dylatacja);
-    // std::cout << test_dylatacja << std::endl;
-
-    // z.przeksztalc(test_zerowanie);
-    // std::cout << test_zerowanie << std::endl;
-
-    // u.przeksztalc(test_usrednianie);
-    // std::cout << test_usrednianie << std::endl;
-
-    // BitmapaExt<bool> aa(5, 5);
-    // aa(1, 1) = aa(2, 1) = aa(3, 1) = aa(2, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = true;
-
-    // Dylatacja d;
-    // Usrednianie u;
-    // ZlozeniePrzeksztalcen zlozenie;
-    // u.przeksztalc(aa);
-    // std::cout << aa << std::endl;
-
-    // aa(1, 1) = aa(2, 1) = aa(3, 1) = aa(2, 2) = aa(1, 3) = aa(2, 3) = aa(3, 3) = true;
-    // d.przeksztalc(aa);
-    // std::cout << aa << std::endl;
+    try
+    {
+        menu();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }

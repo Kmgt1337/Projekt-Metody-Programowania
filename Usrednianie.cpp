@@ -9,9 +9,9 @@ void Usrednianie::przeksztalc(Bitmapa& bmp)
 {
     bool** to_change = f_create_2d_array<bool>(bmp.length(), bmp.width());
 
-    for(size_t i = 0; i < bmp.width() - 1; i++)
+    for(size_t i = 0; i < bmp.length() - 1; i++)
     {
-        for(size_t j = 0; j < bmp.length(); j++)
+        for(size_t j = 0; j < bmp.width(); j++)
         {
             int number_of_diff_color=0;
             if(i>0&&bmp(i-1, j)!=bmp(i, j)) number_of_diff_color++;

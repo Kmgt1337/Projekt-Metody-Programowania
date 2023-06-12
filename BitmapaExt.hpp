@@ -47,7 +47,7 @@ public:
     {
        if(x < 0 || x >= _length || y < 0 || y >= _width)
        {
-            throw myexceptions::out_of_range("Przekroczno zakres bitmapy");
+            throw myexceptions::out_of_range("Przekroczno zakres bitmapy:(" + std::to_string(x) + "," + std::to_string(y) + ")\n");
        }
        return _bmp[x][y];
     }
@@ -77,7 +77,7 @@ private:
 };
 
 /*
-Konstruktor tworzacy bitmape z dlugosci i szerokosci wype³niona wartoscia false
+Konstruktor tworzacy bitmape z dlugosci i szerokosci wypeï¿½niona wartoscia false
 @param length dlugosc bitmapy
 @param width szerokosc bitmapy
 */
@@ -157,7 +157,7 @@ BitmapaExt<T>::BitmapaExt(const BitmapaExt<T>& other)
 }
 
 /*
-Prze³adowanie operatora przypisania zeby przypisywal
+Przeï¿½adowanie operatora przypisania zeby przypisywal
 */
 template <typename T>
 BitmapaExt<T>& BitmapaExt<T>::operator=(const BitmapaExt<T> &other)
@@ -171,9 +171,9 @@ BitmapaExt<T>& BitmapaExt<T>::operator=(const BitmapaExt<T> &other)
     _width = other._width;
     _bmp = f_create_2d_array<T>(_length, _width);
 
-    for(int i = 0; i < _length; i++)
+    for(std::size_t i = 0; i < _length; i++)
     {
-        for(int j = 0; j < _width; j++)
+        for(std::size_t j = 0; j < _width; j++)
         {
             _bmp[i][j] = other._bmp[i][j];
         }
@@ -204,7 +204,7 @@ std::ostream& operator<<(std::ostream& stream, const BitmapaExt<T1>& bmp)
 
 /*
 Funkcja pobierajaca bitmape z pliku
-@param input_file uchwyt do pliku z danymi bitmapy do za³adowania
+@param input_file uchwyt do pliku z danymi bitmapy do zaï¿½adowania
 */
 template <typename T>
 BitmapaExt<T>::BitmapaExt(std::ifstream &input_file)

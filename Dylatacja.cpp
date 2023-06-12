@@ -47,7 +47,7 @@ void Dylatacja::przeksztalc(Bitmapa& bmp)
     // IV przypadek brzegowy - prawy dwolny punkt bitmapy
     if(bmp(bmp.length() - 1, bmp.width() - 1))
     {
-        if(bmp(bmp.length() - 1, bmp.width() - 2) || bmp(bmp.length(), bmp.width() - 1))
+        if(bmp(bmp.length() - 1, bmp.width() - 2) || bmp(bmp.length() - 2, bmp.width() - 1))
         {
             to_change[bmp.length() - 1][bmp.width() - 1] = true;
         }
